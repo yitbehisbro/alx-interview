@@ -1,2 +1,1 @@
-# alx-interview
-An interview preparation project
+README file will be added soon
