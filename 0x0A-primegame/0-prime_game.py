@@ -35,9 +35,9 @@ def isWinner(x, nums):
     ben_wins = 0
     for n in nums:
         if play_game(n):
-            ben_wins += 1
-        else:
             maria_wins += 1
+        else:
+            ben_wins += 1
 
     if maria_wins > ben_wins:
         return "Ben"
