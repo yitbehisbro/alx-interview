@@ -4,7 +4,7 @@
 
 def isWinner(x, nums):
     """ Return: name of the player that won the most rounds """
-    if type(nums) not list:
+    if nums not instanceof(list):
         return None
     if not nums or x < 1:
         return None
