@@ -6,47 +6,24 @@ def isWinner(x, nums):
     """ Return: name of the player that won the most rounds """
     if not nums or x < 1:
         return None
-    if not x:
-        return None
-
-    def is_prime(n):
-        """Checks if prime """
-        if n <= 1:
-            return False
-        for i in range(2, int(n**0.5)+1):
-            if n % i == 0:
-                return False
-        return True
-
-    def get_primes(n):
-        """Gets the value of number which is prime """
-        primes = []
-        for i in range(2, n+1):
-            if is_prime(i):
-                primes.append(i)
-        return primes
-
-    def play_game(n):
-        """Lets playing game"""
-        primes = get_primes(n)
-        turn = 0
-        while primes:
-            prime = primes.pop(0)
-            primes = [x for x in primes if x % prime != 0]
-            turn += 1
-        return turn % 2 == 0
-
-    maria_wins = 0
-    ben_wins = 0
+    n = max(nums)
+    fltr = [True for _ in range(max(n + 1, 2))]
+    for i in range(2, int(pow(n, 0.5)) + 1):
+        if not fltr[i]:
+            continue
+        for j in range(i * i, n + 1, i):
+            fltr[j] = False
+    fltr[0] = fltr[1] = False
+    c = 0
+    for i in range(len(fltr)):
+        if fltr[i]:
+            c += 1
+        fltr[i] = c
+    plyr1 = 0
     for n in nums:
-        if play_game(n):
-            maria_wins += 1
-        else:
-            ben_wins += 1
-
-    if maria_wins > ben_wins:
-        return "Ben"
-    elif ben_wins > maria_wins:
-        return "Maria"
-    else:
+        plyr1 += fltr[n] % 2 == 1
+    if plyr1 * 2 == len(nums):
         return None
+    if plyr1 * 2 > len(nums):
+        return "Maria"
+    return "Ben"
