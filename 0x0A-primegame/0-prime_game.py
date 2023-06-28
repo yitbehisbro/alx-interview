@@ -4,6 +4,9 @@
 
 def isWinner(x, nums):
     """ Return: name of the player that won the most rounds """
+    if not nums or x < 1:
+        return None
+
     def is_prime(n):
         """Checks if prime """
         if n <= 1:
